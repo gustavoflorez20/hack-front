@@ -13,7 +13,7 @@ function SearchBar() {
     event.preventDefault();
 
     try {
-      const response = await axios.get("http://localhost:3001", {
+      const response = await axios.get("https://hack-back-tpx5.onrender.com", {
         params: {
           page: 1,
           limit: 6,
@@ -31,7 +31,7 @@ function SearchBar() {
   };
 
   return (
-    <div className="flex justify-center items-center mt-8">
+    <div className="flex justify-center items-center mt-8 flex-col px-3">
       <img
         className="w-20 bg-white rounded-full"
         src="https://res.cloudinary.com/djkxqbsns/image/upload/v1709975475/nuclio_xyq8wl.png"
@@ -53,21 +53,27 @@ function SearchBar() {
           Consulta
         </button>
       </form>
+      
+      <div className="flex gap-5 ">
+
+      
       {posts.map((post, id) => (
         <div key={id}>
-          <div className="flex justify-center mt-4">
-            <div>
+          <br/>
+          <div className="flex justify-center mt-4 flex-col ">
+            <div className="bg-blue-400">
               <h2>{post.title}</h2>
             </div>
-            <div>
+            <div className="bg-red-400">
               <h2>{post.author}</h2>
             </div>
-            <div>
+            <div className="bg-orange-400">
               <h2>{post.text}</h2>
             </div>
           </div>
         </div>
       ))}
+    </div>
     </div>
   );
 }
