@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-function SearchBar({ onSearch }) {
+function SearchBar() {
   const [searchQuery, setSearchQuery] = useState("");
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState([]);
 
   const handleInputChange = (event) => {
     setSearchQuery(event.target.value);
@@ -17,14 +17,13 @@ function SearchBar({ onSearch }) {
         params: {
           page: 1,
           limit: 6,
-          text: searchQuery
-        }
-      }); 
-      setPosts(response.data)
+          text: searchQuery,
+        },
+      });
+      setPosts(response.data);
       console.log("Respuesta del backend:", response.data);
 
-      
-      onSearch(searchQuery);
+      //onSearch(searchQuery);
     } catch (error) {
       console.error("Error al conectar con el backend:", error);
       throw error;
@@ -54,6 +53,21 @@ function SearchBar({ onSearch }) {
           Consulta
         </button>
       </form>
+      {posts.map((post, id) => (
+        <div key={id}>
+          <div className="flex justify-center mt-4">
+            <div>
+              <h2>{post.title}</h2>
+            </div>
+            <div>
+              <h2>{post.author}</h2>
+            </div>
+            <div>
+              <h2>{post.text}</h2>
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
